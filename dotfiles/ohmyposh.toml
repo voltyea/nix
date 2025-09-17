@@ -7,13 +7,12 @@ final_space = true
   newline = true  
 
   [[blocks.segments]]
-    template = '🌸{{ .UserName }}'
+    template = ' 🌸 {{ .UserName }}'
     foreground = '#000000'
     powerline_symbol = ''
-    leading_diamond = ''
-    background = '#6333AE'
+    background = '#3e8fb0'
     type = 'session'
-    style = 'diamond'
+    style = 'powerline'
 
   [[blocks.segments]]
     template = ' {{ .Path }}'

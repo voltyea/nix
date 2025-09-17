@@ -15,7 +15,16 @@ in
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.timeout = 0;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.canTouchEfiVariables = false;
+  boot.initrd.availableKernelModules = [
+  "xhci_pci"
+  "ehci_pci"
+  "uhci_hcd"
+  "usb_storage"
+  "sd_mod"
+  "ahci"
+  "nvme"
+];
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.kernelModules = [ "rtw89" ];
   boot.kernel.sysctl = { "vm.swappiness" = 10; };
@@ -28,6 +37,9 @@ in
   services.logind.settings.Login.HandleLidSwitch = "ignore";
   services.logind.settings.Login.HandleLidSwitchDocked = "ignore";
   services.gvfs.enable = true;
+   security.sudo.extraConfig = ''
+    Defaults insults
+  '';
 
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
@@ -52,6 +64,7 @@ in
     isNormalUser = true;
     description = "${USERNAME}";
     extraGroups = [ "networkmanager" "wheel" "input" "keyd" "i2c" ];
+    shell = pkgs.nushell;
   };
 
   nix.settings = {
@@ -65,17 +78,17 @@ in
   programs.hyprland.withUWSM = true;
   programs.hyprland.xwayland.enable = true;
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  programs.fish.enable = true;
+  #programs.nushell.enable = true;
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     (callPackage ./pokego.nix{})
+      (callPackage ./kokoCursor.nix{})
       bash
       bat
       bc
       brightnessctl
       btop
       cairo
-      catppuccin-cursors.mochaMauve
       cava
       chafa
       clang
@@ -92,8 +105,11 @@ in
       gcc
       git
       grimblast
+      gzip
       hyprlang
+      hyprpicker
       kitty
+      libnotify
       lua-language-server
       man
       mesa
@@ -101,10 +117,15 @@ in
       nil
       nixpkgs-fmt
       oh-my-posh
+      power-profiles-daemon
       quickshell
       ripgrep
+      rose-pine-gtk-theme
       tmux
       tree-sitter-grammars.tree-sitter-hyprlang
+      unzip
+      upower
+      upower-notify
       vimPlugins.nvim-treesitter-parsers.hyprlang
       vulkan-headers
       vulkan-loader
@@ -113,9 +134,11 @@ in
       wget
       yank
       yazi
+      zip
       zoxide
+      nushell
+      socat
       ];
-  users.defaultUserShell = pkgs.fish;
 
   hardware.enableAllFirmware = true;
   hardware.cpu.intel.updateMicrocode = true;

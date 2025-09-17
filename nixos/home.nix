@@ -14,7 +14,6 @@ in
   xdg.configFile = {
     "nvim".source = config.lib.file.mkOutOfStoreSymlink "/home/${USERNAME}/dotfiles/nvim/";
     "kitty".source = config.lib.file.mkOutOfStoreSymlink "/home/${USERNAME}/dotfiles/kitty/";
-    "fish".source = config.lib.file.mkOutOfStoreSymlink "/home/${USERNAME}/dotfiles/fish/";
     "hypr".source = config.lib.file.mkOutOfStoreSymlink "/home/${USERNAME}/dotfiles/hypr/";
     "ohmyposh.toml".source = config.lib.file.mkOutOfStoreSymlink "/home/${USERNAME}/dotfiles/ohmyposh.toml";
     "tmux".source = config.lib.file.mkOutOfStoreSymlink "/home/${USERNAME}/dotfiles/tmux/";
@@ -22,6 +21,8 @@ in
     "cava".source = config.lib.file.mkOutOfStoreSymlink "/home/${USERNAME}/dotfiles/cava/";
     "quickshell".source = config.lib.file.mkOutOfStoreSymlink "/home/${USERNAME}/dotfiles/quickshell/";
     "btop".source = config.lib.file.mkOutOfStoreSymlink "/home/${USERNAME}/dotfiles/btop/";
+    "nushell".source = config.lib.file.mkOutOfStoreSymlink "/home/${USERNAME}/dotfiles/nushell/";
+    "uwsm".source = config.lib.file.mkOutOfStoreSymlink "/home/${USERNAME}/dotfiles/uwsm/";
 
   };
   services.mpris-proxy.enable = true;

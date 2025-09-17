@@ -2,7 +2,7 @@
 {
 
   "logo": {
-    "source": "$HOME/.config/fastfetch/logo.txt",
+    "source": "~/.config/fastfetch/logo.txt",
   },
   "display": {
     "separator": "  "
