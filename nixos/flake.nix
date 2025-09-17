@@ -1,17 +1,12 @@
-
-
 {
   description = "flakey flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+     nix-maid.url = "github:viperML/nix-maid";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, nix-maid, ... }:
 
     let
     vars = import ./vars.nix;
@@ -23,15 +18,7 @@
       system = "x86_64-linux";
       modules = [
         ./configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.${USERNAME} = import ./home.nix;
-              backupFileExtension = "backup";
-            };
-          }
+        nix-maid.nixosModules.default
       ];
     };
 

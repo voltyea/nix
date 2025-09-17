@@ -1,22 +1,17 @@
 {
   "nodes": {
-    "home-manager": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
+    "nix-maid": {
       "locked": {
-        "lastModified": 1757075491,
-        "narHash": "sha256-a+NMGl5tcvm+hyfSG2DlVPa8nZLpsumuRj1FfcKb2mQ=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "f56bf065f9abedc7bc15e1f2454aa5c8edabaacf",
+        "lastModified": 1757070786,
+        "narHash": "sha256-CD5lOndYyqeGWaH4MD/z5ZFMdcCzOudfuOdMw4MyVRk=",
+        "owner": "viperML",
+        "repo": "nix-maid",
+        "rev": "e4682858e1643653e888d2555ef67a603374f0b9",
         "type": "github"
       },
       "original": {
-        "owner": "nix-community",
-        "repo": "home-manager",
+        "owner": "viperML",
+        "repo": "nix-maid",
         "type": "github"
       }
     },
@@ -38,7 +33,7 @@
     },
     "root": {
       "inputs": {
-        "home-manager": "home-manager",
+        "nix-maid": "nix-maid",
         "nixpkgs": "nixpkgs"
       }
     }

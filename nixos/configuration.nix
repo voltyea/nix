@@ -1,5 +1,5 @@
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
 vars = import ./vars.nix;
@@ -65,6 +65,20 @@ in
     description = "${USERNAME}";
     extraGroups = [ "networkmanager" "wheel" "input" "keyd" "i2c" ];
     shell = pkgs.nushell;
+     maid = {
+      file.xdg_config."hypr/".source = "{{home}}/dotfiles/hypr/";
+      file.xdg_config."btop/".source = "{{home}}/dotfiles/btop/";
+file.xdg_config."cava/".source = "{{home}}/dotfiles/cava/";
+file.xdg_config."fastfetch/".source = "{{home}}/dotfiles/fastfetch/";
+file.xdg_config."kitty/".source = "{{home}}/dotfiles/kitty/";
+file.xdg_config."nushell/".source = "{{home}}/dotfiles/nushell/";
+file.xdg_config."nvim/".source = "{{home}}/dotfiles/nvim/";
+file.xdg_config."quickshell/".source = "{{home}}/dotfiles/quickshell/";
+file.xdg_config."tmux/".source = "{{home}}/dotfiles/tmux/";
+file.xdg_config."uwsm/".source = "{{home}}/dotfiles/uwsm/";
+file.xdg_config."ohmyposh.toml".source = "{{home}}/dotfiles/ohmyposh.toml";
+
+    };
   };
 
   nix.settings = {
