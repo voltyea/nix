@@ -3,10 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-     nix-maid.url = "github:viperML/nix-maid";
+    nix-maid.url = "github:viperML/nix-maid";
+    yazi.url = "github:sxyazi/yazi";
   };
 
-  outputs = { self, nixpkgs, nix-maid, ... }:
+  outputs = { self, nixpkgs, nix-maid, yazi, ... }:
 
     let
     vars = import ./vars.nix;
@@ -18,9 +19,10 @@
       system = "x86_64-linux";
       modules = [
         ./configuration.nix
-        nix-maid.nixosModules.default
+          nix-maid.nixosModules.default
       ];
     };
+    nixpkgs.overlays = [ yazi.overlays.default ];
 
   };
 }

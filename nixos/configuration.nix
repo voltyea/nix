@@ -17,14 +17,14 @@ in
   boot.loader.timeout = 0;
   boot.loader.efi.canTouchEfiVariables = false;
   boot.initrd.availableKernelModules = [
-  "xhci_pci"
-  "ehci_pci"
-  "uhci_hcd"
-  "usb_storage"
-  "sd_mod"
-  "ahci"
-  "nvme"
-];
+    "xhci_pci"
+      "ehci_pci"
+      "uhci_hcd"
+      "usb_storage"
+      "sd_mod"
+      "ahci"
+      "nvme"
+  ];
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.kernelModules = [ "rtw89" ];
   boot.kernel.sysctl = { "vm.swappiness" = 10; };
@@ -37,9 +37,9 @@ in
   services.logind.settings.Login.HandleLidSwitch = "ignore";
   services.logind.settings.Login.HandleLidSwitchDocked = "ignore";
   services.gvfs.enable = true;
-   security.sudo.extraConfig = ''
+  security.sudo.extraConfig = ''
     Defaults insults
-  '';
+    '';
 
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
@@ -65,18 +65,29 @@ in
     description = "${USERNAME}";
     extraGroups = [ "networkmanager" "wheel" "input" "keyd" "i2c" ];
     shell = pkgs.nushell;
-     maid = {
+    maid = {
       file.xdg_config."hypr/".source = "{{home}}/dotfiles/hypr/";
       file.xdg_config."btop/".source = "{{home}}/dotfiles/btop/";
-file.xdg_config."cava/".source = "{{home}}/dotfiles/cava/";
-file.xdg_config."fastfetch/".source = "{{home}}/dotfiles/fastfetch/";
-file.xdg_config."kitty/".source = "{{home}}/dotfiles/kitty/";
-file.xdg_config."nushell/".source = "{{home}}/dotfiles/nushell/";
-file.xdg_config."nvim/".source = "{{home}}/dotfiles/nvim/";
-file.xdg_config."quickshell/".source = "{{home}}/dotfiles/quickshell/";
-file.xdg_config."tmux/".source = "{{home}}/dotfiles/tmux/";
-file.xdg_config."uwsm/".source = "{{home}}/dotfiles/uwsm/";
-file.xdg_config."ohmyposh.toml".source = "{{home}}/dotfiles/ohmyposh.toml";
+      file.xdg_config."cava/".source = "{{home}}/dotfiles/cava/";
+      file.xdg_config."fastfetch/".source = "{{home}}/dotfiles/fastfetch/";
+      file.xdg_config."kitty/".source = "{{home}}/dotfiles/kitty/";
+      file.xdg_config."nushell/".source = "{{home}}/dotfiles/nushell/";
+      file.xdg_config."nvim/".source = "{{home}}/dotfiles/nvim/";
+      file.xdg_config."quickshell/".source = "{{home}}/dotfiles/quickshell/";
+      file.xdg_config."tmux/".source = "{{home}}/dotfiles/tmux/";
+      file.xdg_config."uwsm/".source = "{{home}}/dotfiles/uwsm/";
+      file.xdg_config."ohmyposh.toml".source = "{{home}}/dotfiles/ohmyposh.toml";
+      file.xdg_config."yazi/".source = "{{home}}/dotfiles/yazi/";
+
+      dconf.settings = {
+        "/org/gnome/desktop/interface/gtk-theme" = "rose-pine-dawn";
+        "/org/gnome/desktop/interface/font-name" = "Ubuntu Nerd Font Regular 11";
+        "/org/gnome/desktop/interface/color-scheme" = "prefer-dark";
+        "/org/gnome/desktop/interface/font-hinting" = "full";
+        "/org/gnome/desktop/interface/font-antialiasing" = "rgba";
+        "/org/gnome/desktop/interface/cursor-theme" = "'Kokomi_Cursor'";
+        "/org/gnome/desktop/interface/cursor-size" = 24;
+      };
 
     };
   };
@@ -84,40 +95,34 @@ file.xdg_config."ohmyposh.toml".source = "{{home}}/dotfiles/ohmyposh.toml";
   nix.settings = {
     substituters = ["https://hyprland.cachix.org"];
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    extra-substituters = [ "https://yazi.cachix.org" ];
+    extra-trusted-public-keys = [ "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k=" ];
   };
 
 # Install applications
+  programs.yazi.enable = true;
   programs.firefox.enable = true;
   programs.hyprland.enable = true;
   programs.hyprland.withUWSM = true;
   programs.hyprland.xwayland.enable = true;
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  #programs.nushell.enable = true;
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     (callPackage ./pokego.nix{})
       (callPackage ./kokoCursor.nix{})
       bash
-      bat
-      bc
       brightnessctl
       btop
-      cairo
       cava
-      chafa
       clang
       cliphist
       cmake
-      cpio
       curl
       fastfetch
-      fd
-      ffmpeg
-      fontconfig
-      fuse
-      fzf
       gcc
       git
+      glib
+      glibc
       grimblast
       gzip
       hyprlang
@@ -130,6 +135,7 @@ file.xdg_config."ohmyposh.toml".source = "{{home}}/dotfiles/ohmyposh.toml";
       neovim
       nil
       nixpkgs-fmt
+      nushell
       oh-my-posh
       power-profiles-daemon
       quickshell
@@ -147,11 +153,7 @@ file.xdg_config."ohmyposh.toml".source = "{{home}}/dotfiles/ohmyposh.toml";
       vulkan-validation-layers
       wget
       yank
-      yazi
       zip
-      zoxide
-      nushell
-      socat
       ];
 
   hardware.enableAllFirmware = true;
