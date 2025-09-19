@@ -19,6 +19,21 @@ def --env y [...args] {
 	}
 	rm -fp $tmp
 }
+$env.config.edit_mode = 'vi'
 
+$env.config.keybindings ++= [
+    {
+        name: history_completer
+        modifier: control
+        keycode: char_f
+        mode: [vi_insert]
+        event: { send: HistoryHintComplete }
+    }
+]
+$env.PROMPT_INDICATOR_VI_INSERT = $"(ansi '#3e8fb0')❯ (ansi reset)"
+$env.PROMPT_INDICATOR_VI_NORMAL = $"(ansi '#eb6f92')❮ (ansi reset)"
+
+$env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT = ""
+$env.TRANSIENT_PROMPT_COMMAND = ""
 
 
