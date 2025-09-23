@@ -138,7 +138,6 @@ in
       nushell
       oh-my-posh
       power-profiles-daemon
-      quickshell
       ripgrep
       rose-pine-gtk-theme
       tmux
@@ -154,6 +153,9 @@ in
       wget
       yank
       zip
+      quickshell
+      nautilus
+      adwaita-icon-theme
       ];
 
   hardware.enableAllFirmware = true;
