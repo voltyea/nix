@@ -156,6 +156,7 @@ in
       quickshell
       nautilus
       adwaita-icon-theme
+      vesktop
       ];
 
   hardware.enableAllFirmware = true;
